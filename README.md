@@ -1,97 +1,135 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# AI Chat App
 
-# Getting Started
+A mini AiChat mobile application built with React Native.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Chat Interface**: Send messages and receive AI responses in a modern chat bubble style
+- **Theme Support**: Toggle between light and dark themes
+- **Local Storage**: Chat history persists using AsyncStorage
+- **Settings Screen**: Configure API keys and manage app preferences
+- **Navigation**: React Navigation for seamless screen transitions
+- **Error Handling**: Graceful fallback when AI service is unavailable
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Prerequisites
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Node.js (version 18 or higher)
+- React Native CLI
+- Android Studio (For Android development)
+- Xcode (For Ios Development)
+- An OpenAI API key (optional, for real AI responses)
 
-```sh
-# Using npm
-npm start
+## Installation
 
-# OR using Yarn
-yarn start
-```
+1. **Clone the repository**
+   ```
+   git clone <repository-url>
+   cd AiChatApp
+   ```
 
-## Step 2: Build and run your app
+2. **Install dependencies**
+   ```
+   npm install
+   ```
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+3. **Install iOS dependencies (macOS only)**
+   ```
+   cd ios && pod install && cd ..
+   ```
+
+## Configuration
+
+### API Key Setup (Optional)
+
+1. Get an OpenAI API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Open the app and navigate to Settings
+3. Enter your API key and tap "Save API Key"
+4. The app will now use AI responses from your backend
+
+**Note**: Without an API key, the app will use fallback responses for demonstration purposes.
+
+## Running the App
 
 ### Android
 
-```sh
-# Using npm
+```
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+### iOS (macOS only)
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
 ```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Metro Bundler
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+npm start
+```
 
-## Step 3: Modify your app
+## Project Structure
 
-Now that you have successfully run the app, let's make changes!
+```
+src/
+├── context/
+│   └── ThemeContext.js          # Theme management and colors
+├── navigation/
+│   └── AppNavigator.js          # Navigation configuration
+├── screens/
+│   ├── ChatScreen.js            # Main chat interface
+│   └── SettingsScreen.js        # Settings and configuration
+└── services/
+    └── aiService.js             # AI API integration
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Key Components
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### ThemeContext
+- Manages light/dark theme state
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### ChatScreen
+- Main chat interface with message bubbles
+- Handles message sending and receiving
+- Integrates with AI service for responses
+- Auto-scrolls to latest messages
+- Shows typing indicators
 
-## Congratulations! :tada:
+### SettingsScreen
+- API key configuration
+- Theme toggle
+- Chat history management
+- Data persistence controls
 
-You've successfully run and modified your React Native App. :partying_face:
+### AIService
+- Handles backend API communication via proxy
+- API key authentication in headers
+- Provides fallback responses
+- Error handling and user feedback
+- Conversation context management
 
-### Now what?
+## Dependencies
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- **@react-navigation/native**: Navigation framework
+- **@react-navigation/stack**: Stack navigation
+- **@react-native-async-storage/async-storage**: Local data persistence
+- **react-native-safe-area-context**: Safe area handling
+- **react-native-screens**: Native screen components
+- **react-native-gesture-handler**: Touch handling
 
-# Troubleshooting
+## Troubleshooting
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Common Issues
 
-# Learn More
+1. **Metro bundler issues**
+   ```
+   npx react-native start --reset-cache
+   ```
 
-To learn more about React Native, take a look at the following resources:
+2. **Android build errors**
+   - Clean and rebuild: `cd android && ./gradlew clean && cd ..`
+   - Check Android SDK and build tools versions
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+3. **iOS build errors**
+   - Clean build folder in Xcode
+   - Update CocoaPods: `cd ios && pod update && cd ..`
